@@ -5,4 +5,4 @@ Disallow: /db.sql
 Disallow: /send_otp.php
 Disallow: /logout.php
 
-Sitemap: https://phenomenal-tartufo-af071e.netlify.app/sitemap.xml
+Sitemap: https://priyanshupanchal.github.io/indianmart/sitemap.xml
