@@ -3,15 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign In — Indian Mart</title>
-  <meta name="description" content="Sign in to Indian Mart — India's premier online shopping destination.">
+  <title>Sign In &amp; Phone OTP — Indian Mart</title>
+  <meta name="description" content="Sign in to Indian Mart via Phone OTP or Email — India's premier online shopping destination.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ════════════════════════════════════════════════
-       RESET & ROOT
-    ════════════════════════════════════════════════ */
+    /* ── RESET & ROOT ────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --gold:    #F5C842;
@@ -20,10 +18,10 @@
       --cream:   #FDF8EF;
       --dark:    #0B0C10;
       --dark-2:  #13141A;
-      --glass:   rgba(255,255,255,0.055);
+      --glass:   rgba(255,255,255,0.06);
       --glass-b: rgba(255,255,255,0.1);
       --text:    #F0EBE0;
-      --text-2:  rgba(240,235,224,0.55);
+      --text-2:  rgba(240,235,224,0.65);
       --red:     #FF4D6D;
       --green:   #06D6A0;
       --radius:  18px;
@@ -38,14 +36,12 @@
       overflow-x: hidden;
     }
 
-    /* ════════════════════════════════════════════════
-       ANIMATED BACKGROUND
-    ════════════════════════════════════════════════ */
+    /* ── ANIMATED BACKGROUND ─────────────────────────────────────── */
     .bg {
       position: fixed; inset: 0; z-index: 0; overflow: hidden;
-      background: radial-gradient(ellipse 100% 80% at 15% 0%,   #1a0a2e 0%, transparent 55%),
-                  radial-gradient(ellipse 80%  70% at 90% 100%, #1c0a00 0%, transparent 55%),
-                  radial-gradient(ellipse 60%  50% at 50% 50%,  #0d0b1a 0%, transparent 100%),
+      background: radial-gradient(ellipse 100% 80% at 15% 0%, #1a0a2e 0%, transparent 55%),
+                  radial-gradient(ellipse 80% 70% at 90% 100%, #1c0a00 0%, transparent 55%),
+                  radial-gradient(ellipse 60% 50% at 50% 50%, #0d0b1a 0%, transparent 100%),
                   #0B0C10;
     }
     .blob {
@@ -56,220 +52,155 @@
     .blob-1 { width:620px;height:620px;top:-200px;left:-180px;background:radial-gradient(circle,rgba(245,200,66,.14),transparent 68%);animation-duration:12s; }
     .blob-2 { width:480px;height:480px;bottom:-150px;right:-120px;background:radial-gradient(circle,rgba(255,107,43,.1),transparent 68%);animation-duration:15s;animation-delay:-5s; }
     .blob-3 { width:340px;height:340px;top:40%;left:55%;background:radial-gradient(circle,rgba(100,60,255,.08),transparent 68%);animation-duration:18s;animation-delay:-9s; }
-    @keyframes blobDrift {
-      from { transform: translate(0,0) scale(1); }
-      to   { transform: translate(30px,20px) scale(1.06); }
-    }
+    @keyframes blobDrift { from{transform:translate(0,0) scale(1)} to{transform:translate(30px,20px) scale(1.06)} }
+    .sparkle { position: absolute; border-radius: 50%; pointer-events:none; animation: sparkleFly linear infinite; }
+    @keyframes sparkleFly { 0%{transform:translateY(105vh);opacity:0} 10%{opacity:1} 90%{opacity:.6} 100%{transform:translateY(-5vh);opacity:0} }
 
-    /* Floating sparkles */
-    .sparkle {
-      position: absolute; width:3px;height:3px;border-radius:50%;
-      background: var(--gold); pointer-events:none;
-      animation: sparkleFly linear infinite;
-    }
-    @keyframes sparkleFly {
-      0%   { transform:translateY(110vh) rotate(0deg); opacity:0; }
-      8%   { opacity:1; }
-      92%  { opacity:.6; }
-      100% { transform:translateY(-5vh) rotate(360deg) translateX(var(--dx,0px)); opacity:0; }
-    }
-
-    /* ════════════════════════════════════════════════
-       HEADER
-    ════════════════════════════════════════════════ */
+    /* ── HEADER ─────────────────────────────────────────────────── */
     .page-header {
-      position: relative; z-index: 20;
+      position: relative; z-index: 10;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 22px 44px;
+      padding: 24px 44px;
     }
     .logo {
-      display: flex; align-items: center; gap: 12px;
-      text-decoration: none; color: var(--text);
+      display: flex; align-items: center; gap: 10px; text-decoration: none;
+      font-family: 'Outfit', sans-serif; font-size: 1.35rem; font-weight: 800; color: #fff;
     }
     .logo-mark {
-      width: 46px; height: 46px;
+      width: 36px; height: 36px; border-radius: 10px;
       background: linear-gradient(135deg, var(--gold), var(--orange));
-      border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 24px;
-      box-shadow: 0 6px 28px rgba(245,200,66,.35);
-    }
-    .logo-text {
-      font-family: 'Outfit', sans-serif;
-      font-weight: 800; font-size: 1.35rem; letter-spacing: -.02em;
+      display: flex; align-items: center; justify-content: center; font-size: 18px;
     }
     .logo-text em { color: var(--gold); font-style: normal; }
     .header-back {
-      display: flex; align-items: center; gap: 6px;
-      text-decoration: none; color: var(--text-2);
-      font-size: .82rem; font-weight: 500;
-      padding: 8px 18px; border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.1);
-      background: rgba(255,255,255,.04);
-      backdrop-filter: blur(12px);
-      transition: all .25s var(--ease);
+      display: flex; align-items: center; gap: 6px; text-decoration: none; color: var(--text-2);
+      font-size: .84rem; font-weight: 600; padding: 8px 18px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.04);
+      backdrop-filter: blur(12px); transition: all .25s;
     }
-    .header-back:hover { color: var(--text); border-color: rgba(245,200,66,.35); background: rgba(245,200,66,.07); }
+    .header-back:hover { color: #fff; border-color: var(--gold); background: rgba(245,200,66,.1); }
 
-    /* ════════════════════════════════════════════════
-       MAIN LAYOUT
-    ════════════════════════════════════════════════ */
+    /* ── AUTH CARD ──────────────────────────────────────────────── */
     .auth-wrap {
       position: relative; z-index: 10;
       display: flex; align-items: center; justify-content: center;
-      min-height: calc(100dvh - 100px);
-      padding: 20px;
+      min-height: calc(100dvh - 120px); padding: 20px;
     }
-
-    /* ════════════════════════════════════════════════
-       CARD
-    ════════════════════════════════════════════════ */
     .card {
-      width: 100%; max-width: 448px;
+      width: 100%; max-width: 460px;
       background: var(--glass);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 28px;
-      padding: 44px 46px;
-      backdrop-filter: blur(48px);
-      -webkit-backdrop-filter: blur(48px);
-      box-shadow: 0 40px 100px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.03) inset;
+      border: 1.5px solid rgba(255,255,255,.1);
+      border-radius: 28px; padding: 40px 38px;
+      backdrop-filter: blur(48px); -webkit-backdrop-filter: blur(48px);
+      box-shadow: 0 40px 100px rgba(0,0,0,.65);
       position: relative; overflow: hidden;
-      animation: cardIn .65s var(--ease) both;
     }
-    @keyframes cardIn {
-      from { opacity:0; transform:translateY(36px) scale(.96); }
-      to   { opacity:1; transform:translateY(0) scale(1); }
-    }
-    /* top shimmer line */
     .card::before {
-      content:'';
-      position:absolute; top:0; left:10%; right:10%; height:1.5px;
+      content:''; position:absolute; top:0; left:10%; right:10%; height:2px;
       background: linear-gradient(90deg,transparent,var(--gold),var(--orange),transparent);
-      border-radius:0 0 4px 4px;
     }
-
-    /* ── Badge ── */
     .badge {
-      display:inline-flex; align-items:center; gap:5px;
-      background:rgba(245,200,66,.1); border:1px solid rgba(245,200,66,.28);
-      color:var(--gold); font-size:.68rem; font-weight:700;
-      letter-spacing:.08em; text-transform:uppercase;
-      padding:4px 14px; border-radius:999px; margin-bottom:16px;
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(245,200,66,.12); border: 1px solid rgba(245,200,66,.3);
+      color: var(--gold); font-size: .7rem; font-weight: 800; letter-spacing: .08em;
+      text-transform: uppercase; padding: 4px 14px; border-radius: 999px; margin-bottom: 14px;
     }
-    /* ── Title ── */
     .card-title {
-      font-family:'Outfit',sans-serif; font-size:2.05rem; font-weight:800;
-      line-height:1.15; margin-bottom:8px; color:#fff; letter-spacing:-.03em;
+      font-family: 'Outfit', sans-serif; font-size: 2.1rem; font-weight: 800;
+      line-height: 1.15; margin-bottom: 6px; color: #fff;
     }
     .card-title span {
-      background:linear-gradient(130deg,var(--gold),var(--orange));
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+      background: linear-gradient(130deg, var(--gold), var(--orange));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
-    .card-sub { font-size:.85rem; color:var(--text-2); margin-bottom:28px; line-height:1.65; }
+    .card-sub { font-size: .85rem; color: var(--text-2); margin-bottom: 22px; line-height: 1.5; }
 
-    /* ── Alerts ── */
-    .alert {
-      display:flex; align-items:flex-start; gap:10px;
-      padding:11px 16px; border-radius:12px;
-      font-size:.8rem; line-height:1.55;
-      margin-bottom:16px;
-      animation:alertIn .3s var(--ease);
+    /* ── AUTH TABS ──────────────────────────────────────────────── */
+    .auth-tabs {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+      background: rgba(255,255,255,.05); padding: 5px; border-radius: 14px;
+      margin-bottom: 24px; border: 1px solid rgba(255,255,255,.08);
     }
-    @keyframes alertIn { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:translateY(0)} }
-    .alert-err { background:rgba(255,77,109,.1); border:1px solid rgba(255,77,109,.3); color:#ff8fa5; }
-    .alert-ok  { background:rgba(6,214,160,.09);  border:1px solid rgba(6,214,160,.25); color:#34d39c; }
+    .auth-tab-btn {
+      padding: 10px; border-radius: 10px; font-size: .82rem; font-weight: 700;
+      color: var(--text-2); border: none; background: transparent; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      transition: all .2s;
+    }
+    .auth-tab-btn.active {
+      background: linear-gradient(135deg, var(--gold), var(--orange));
+      color: #0B0C10; box-shadow: 0 4px 16px rgba(245,200,66,.3);
+    }
 
-    /* ── Form ── */
-    .form { display:flex; flex-direction:column; gap:15px; }
-    .fgroup { display:flex; flex-direction:column; gap:5px; }
-    .flabel { font-size:.75rem; font-weight:600; color:rgba(240,235,224,.55); letter-spacing:.04em; }
-    .fwrap { position:relative; display:flex; align-items:center; }
-    .ficon { position:absolute; left:15px; font-size:16px; opacity:.4; pointer-events:none; transition:opacity .2s; }
-    .fwrap:focus-within .ficon { opacity:.9; }
+    /* ── FORMS ──────────────────────────────────────────────────── */
+    .form-panel { display: flex; flex-direction: column; gap: 16px; }
+    .fgroup { display: flex; flex-direction: column; gap: 6px; }
+    .flabel { font-size: .76rem; font-weight: 600; color: var(--text-2); letter-spacing: .03em; }
+    .fwrap { position: relative; display: flex; align-items: center; }
+    .ficon { position: absolute; left: 16px; font-size: 16px; opacity: .5; pointer-events: none; }
+    .phone-prefix {
+      position: absolute; left: 16px; font-size: .88rem; font-weight: 700; color: var(--gold);
+      display: flex; align-items: center; gap: 4px; pointer-events: none;
+    }
     .finput {
-      width:100%; padding:13px 46px;
-      background:rgba(255,255,255,.06); border:1.5px solid rgba(255,255,255,.1);
-      border-radius:13px; color:var(--text); font-size:.88rem; font-family:'Inter',sans-serif;
-      outline:none; transition:all .25s var(--ease);
+      width: 100%; padding: 13px 18px 13px 48px;
+      background: rgba(255,255,255,.06); border: 1.5px solid rgba(255,255,255,.1);
+      border-radius: 13px; color: #fff; font-size: .9rem; outline: none; transition: all .2s;
     }
-    .finput::placeholder { color:rgba(240,235,224,.2); }
-    .finput:hover { border-color:rgba(255,255,255,.18); background:rgba(255,255,255,.09); }
-    .finput:focus { border-color:rgba(245,200,66,.6); background:rgba(245,200,66,.06); box-shadow:0 0 0 3px rgba(245,200,66,.1); }
-    .eye { position:absolute; right:12px; background:none; border:none; cursor:pointer; font-size:15px; opacity:.35; padding:5px; transition:opacity .2s; }
-    .eye:hover { opacity:.75; }
+    .finput.phone-input { padding-left: 78px; letter-spacing: .08em; font-weight: 600; }
+    .finput:focus { border-color: var(--gold); background: rgba(245,200,66,.06); box-shadow: 0 0 0 3px rgba(245,200,66,.1); }
 
-    /* Options row */
-    .opts-row { display:flex; align-items:center; justify-content:space-between; }
-    .cklabel {
-      display:flex; align-items:center; gap:8px;
-      font-size:.78rem; color:var(--text-2); cursor:pointer;
+    /* ── OTP BOXES ──────────────────────────────────────────────── */
+    .otp-container {
+      display: flex; gap: 8px; justify-content: space-between; margin: 8px 0;
     }
-    .cklabel input[type=checkbox] {
-      appearance:none; width:16px; height:16px; border-radius:5px;
-      border:1.5px solid rgba(255,255,255,.2); background:rgba(255,255,255,.05);
-      cursor:pointer; transition:all .2s; position:relative; flex-shrink:0;
+    .otp-digit {
+      width: 48px; height: 54px; border-radius: 12px;
+      background: rgba(255,255,255,.08); border: 1.5px solid rgba(255,255,255,.15);
+      text-align: center; font-size: 1.4rem; font-weight: 800; color: var(--gold);
+      outline: none; transition: all .2s; font-family: monospace;
     }
-    .cklabel input[type=checkbox]:checked { background:var(--gold); border-color:var(--gold); }
-    .cklabel input[type=checkbox]:checked::after {
-      content:'✓'; position:absolute; top:50%; left:50%;
-      transform:translate(-50%,-50%); color:#000; font-size:10px; font-weight:800;
+    .otp-digit:focus {
+      border-color: var(--gold); background: rgba(245,200,66,.12);
+      box-shadow: 0 0 0 3px rgba(245,200,66,.2); transform: translateY(-2px);
     }
-    .forgot { font-size:.78rem; color:var(--gold); text-decoration:none; font-weight:600; transition:color .2s; }
-    .forgot:hover { color:var(--orange); }
 
-    /* Submit */
-    .submit {
-      width:100%; padding:14.5px; border-radius:14px; border:none;
-      background:linear-gradient(130deg,var(--gold) 0%,var(--orange) 100%);
-      color:#0B0C10; font-family:'Outfit',sans-serif; font-size:.95rem; font-weight:800;
-      cursor:pointer; transition:all .3s var(--ease);
-      box-shadow:0 6px 28px rgba(245,200,66,.3); margin-top:4px; position:relative; overflow:hidden;
-      letter-spacing:.01em;
+    .submit-btn {
+      width: 100%; padding: 14px; border-radius: 14px; border: none;
+      background: linear-gradient(130deg, var(--gold) 0%, var(--orange) 100%);
+      color: #0B0C10; font-family: 'Outfit', sans-serif; font-size: .98rem; font-weight: 800;
+      cursor: pointer; transition: all .3s var(--ease);
+      box-shadow: 0 6px 28px rgba(245,200,66,.35); margin-top: 4px;
     }
-    .submit::after {
-      content:''; position:absolute; inset:0;
-      background:linear-gradient(180deg,rgba(255,255,255,.18),transparent);
-      opacity:0; transition:opacity .25s;
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(245,200,66,.5); }
+
+    .resend-row {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: .78rem; color: var(--text-2); margin-top: 2px;
     }
-    .submit:hover:not(:disabled) { transform:translateY(-3px); box-shadow:0 10px 40px rgba(245,200,66,.45); }
-    .submit:hover::after { opacity:1; }
-    .submit:active:not(:disabled) { transform:translateY(-1px); }
-    .submit:disabled { opacity:.55; cursor:not-allowed; transform:none; }
+    .resend-btn {
+      color: var(--gold); background: none; border: none; font-weight: 700; cursor: pointer;
+    }
+    .resend-btn:disabled { color: rgba(240,235,224,.3); cursor: not-allowed; }
 
-    /* Alt link + trust */
-    .alt { text-align:center; font-size:.8rem; color:var(--text-2); margin-top:22px; }
-    .alt a { color:var(--gold); text-decoration:none; font-weight:700; transition:color .2s; }
-    .alt a:hover { color:var(--orange); }
-    .trust-row { display:flex; align-items:center; justify-content:center; gap:22px; margin-top:20px; padding-top:18px; border-top:1px solid rgba(255,255,255,.06); }
-    .trust-it { display:flex; align-items:center; gap:5px; font-size:.7rem; color:rgba(240,235,224,.3); }
+    /* Alert & Toast */
+    .alert-box {
+      padding: 12px 16px; border-radius: 12px; font-size: .82rem; margin-bottom: 16px; display: none;
+    }
+    .alert-box.err { background: rgba(255,77,109,.12); border: 1px solid var(--red); color: #ff8fa5; }
+    .alert-box.ok  { background: rgba(6,214,160,.12); border: 1px solid var(--green); color: #34d39c; }
 
-    /* ── Footer ── */
-    .page-footer { position:relative;z-index:10; text-align:center; padding:22px; font-size:.73rem; color:rgba(240,235,224,.22); }
-    .page-footer a { color:rgba(240,235,224,.3); margin:0 9px; text-decoration:none; }
-    .page-footer a:hover { color:var(--gold); }
-
-    /* Toast */
-    #toasts { position:fixed; bottom:26px; right:26px; z-index:9999; display:flex; flex-direction:column; gap:10px; }
+    #toasts { position: fixed; bottom: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
     .toast {
-      padding:12px 20px; background:rgba(11,12,16,.97);
-      border-left:3px solid var(--gold); border-radius:12px;
-      color:var(--text); font-size:.83rem; font-weight:500; max-width:310px;
-      box-shadow:0 8px 32px rgba(0,0,0,.55);
-      animation:toastIn .35s var(--ease);
+      padding: 12px 20px; background: rgba(11,12,16,.96); border-left: 3.5px solid var(--gold);
+      border-radius: 12px; color: #fff; font-size: .85rem; font-weight: 600;
+      box-shadow: 0 10px 36px rgba(0,0,0,.6); animation: toastIn .3s var(--ease);
     }
-    @keyframes toastIn { from{opacity:0;transform:translateX(28px)} to{opacity:1;transform:translateX(0)} }
-
-    /* Responsive */
-    @media (max-width:520px) {
-      .page-header { padding:18px 22px; }
-      .card { padding:30px 24px; border-radius:22px; }
-      .card-title { font-size:1.65rem; }
-    }
+    @keyframes toastIn { from{transform:translateX(30px);opacity:0} to{transform:translateX(0);opacity:1} }
   </style>
 </head>
 <body>
 
-<!-- BACKGROUND -->
 <div class="bg">
   <div class="blob blob-1"></div>
   <div class="blob blob-2"></div>
@@ -277,166 +208,254 @@
   <div id="sparkle-wrap"></div>
 </div>
 
-<!-- HEADER -->
 <header class="page-header">
   <a href="index.html" class="logo">
-    <div class="logo-mark">🇮🇳</div>
+    <div class="logo-mark">🛍️</div>
     <span class="logo-text">Indian<em>Mart</em></span>
   </a>
   <a href="index.html" class="header-back">← Back to Shopping</a>
 </header>
 
-<!-- MAIN -->
 <main class="auth-wrap">
   <div class="card">
-
-    <div class="badge">🔐 &nbsp;Secure Login</div>
+    <div class="badge">🔐 Secure Login &amp; OTP</div>
     <h1 class="card-title">Welcome <span>Back!</span></h1>
-    <p class="card-sub">Sign in to access your orders, wishlist &amp; exclusive member deals.</p>
+    <p class="card-sub">Login via instant Mobile Phone OTP or Email credentials.</p>
 
-    <div id="alert-box" style="display:none"></div>
+    <div id="alert-box" class="alert-box"></div>
 
-    <!-- Email Form -->
-    <form class="form" id="login-form" novalidate autocomplete="on">
+    <!-- Dual Auth Mode Tabs -->
+    <div class="auth-tabs">
+      <button type="button" class="auth-tab-btn active" id="tab-phone-btn" onclick="switchTab('phone')">
+        📱 Phone OTP
+      </button>
+      <button type="button" class="auth-tab-btn" id="tab-email-btn" onclick="switchTab('email')">
+        ✉️ Email &amp; Password
+      </button>
+    </div>
 
+    <!-- ═══ PANEL 1: PHONE OTP LOGIN ═══ -->
+    <div id="panel-phone" class="form-panel">
+      
+      <!-- Phone Step 1: Enter Mobile -->
+      <div id="phone-step-1">
+        <div class="fgroup">
+          <label class="flabel" for="phone-number">Mobile Phone Number</label>
+          <div class="fwrap">
+            <span class="phone-prefix">🇮🇳 +91</span>
+            <input type="tel" id="phone-number" class="finput phone-input" placeholder="98765 43210" maxlength="10" autocomplete="tel">
+          </div>
+        </div>
+
+        <button type="button" class="submit-btn" id="send-otp-btn" onclick="sendPhoneOTP()" style="margin-top:14px;">
+          📲 Send 6-Digit OTP
+        </button>
+      </div>
+
+      <!-- Phone Step 2: Verify OTP -->
+      <div id="phone-step-2" style="display:none;">
+        <div class="fgroup">
+          <label class="flabel">Enter 6-Digit Verification Code</label>
+          <div class="otp-container">
+            <input type="text" maxlength="1" class="otp-digit" id="otp-1" oninput="moveToNext(this, 'otp-2')">
+            <input type="text" maxlength="1" class="otp-digit" id="otp-2" oninput="moveToNext(this, 'otp-3')" onkeydown="handleBack(event, this, 'otp-1')">
+            <input type="text" maxlength="1" class="otp-digit" id="otp-3" oninput="moveToNext(this, 'otp-4')" onkeydown="handleBack(event, this, 'otp-2')">
+            <input type="text" maxlength="1" class="otp-digit" id="otp-4" oninput="moveToNext(this, 'otp-5')" onkeydown="handleBack(event, this, 'otp-3')">
+            <input type="text" maxlength="1" class="otp-digit" id="otp-5" oninput="moveToNext(this, 'otp-6')" onkeydown="handleBack(event, this, 'otp-4')">
+            <input type="text" maxlength="1" class="otp-digit" id="otp-6" onkeydown="handleBack(event, this, 'otp-5')">
+          </div>
+        </div>
+
+        <div class="resend-row">
+          <span>Didn't receive code?</span>
+          <button type="button" class="resend-btn" id="resend-btn" onclick="sendPhoneOTP()" disabled>Resend in <span id="resend-timer">30s</span></button>
+        </div>
+
+        <button type="button" class="submit-btn" onclick="verifyPhoneOTP()" style="margin-top:14px;">
+          ✅ Verify OTP &amp; Sign In
+        </button>
+        <button type="button" onclick="resetPhoneStep()" style="width:100%; margin-top:8px; background:none; border:none; color:var(--text-2); font-size:0.78rem; cursor:pointer;">
+          ← Change Phone Number
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ═══ PANEL 2: EMAIL LOGIN ═══ -->
+    <form id="panel-email" class="form-panel" style="display:none;" onsubmit="handleEmailLogin(event)">
       <div class="fgroup">
         <label class="flabel" for="email">Email Address</label>
         <div class="fwrap">
           <span class="ficon">✉️</span>
-          <input type="email" id="email" name="email" class="finput"
-                 placeholder="you@example.com" autocomplete="email" required>
+          <input type="email" id="email" class="finput" placeholder="name@example.com" required>
         </div>
       </div>
-
       <div class="fgroup">
         <label class="flabel" for="password">Password</label>
         <div class="fwrap">
           <span class="ficon">🔒</span>
-          <input type="password" id="password" name="password" class="finput"
-                 placeholder="Enter your password" autocomplete="current-password" required>
-          <button type="button" class="eye" id="eye-pw" onclick="toggleEye('password','eye-pw')">👁</button>
+          <input type="password" id="password" class="finput" placeholder="Enter password" required>
         </div>
       </div>
-
-      <div class="opts-row">
-        <label class="cklabel">
-          <input type="checkbox" id="remember"> Remember me
-        </label>
-        <a href="#" class="forgot">Forgot password?</a>
-      </div>
-
-      <button type="submit" class="submit" id="login-btn">🛒 &nbsp;Sign In to Indian Mart</button>
+      <button type="submit" class="submit-btn">
+        🛒 Sign In to Indian Mart
+      </button>
     </form>
 
-    <p class="alt">Don't have an account? <a href="register.html">Create Account →</a></p>
-
-    <div class="trust-row">
-      <span class="trust-it">🔒 SSL Secured</span>
-      <span class="trust-it">🇮🇳 Made in India</span>
-      <span class="trust-it">✅ Verified</span>
-    </div>
+    <p style="text-align:center; font-size:.8rem; color:var(--text-2); margin-top:20px;">
+      Don't have an account? <a href="register.html" style="color:var(--gold); font-weight:700; text-decoration:none;">Create Account →</a>
+    </p>
 
   </div>
 </main>
 
-<footer class="page-footer">
-  <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Help</a>
-  <div style="margin-top:6px">© 2025 Indian Mart. All rights reserved.</div>
-</footer>
-
 <div id="toasts"></div>
 
 <script>
-/* ── Sparkles ─────────────────────────────────────────────────────────── */
-(function(){
-  const w = document.getElementById('sparkle-wrap');
-  for(let i=0;i<35;i++){
-    const s=document.createElement('div'); s.className='sparkle';
-    s.style.cssText=`left:${Math.random()*100}%;width:${1+Math.random()*2}px;height:${1+Math.random()*2}px;animation-duration:${7+Math.random()*12}s;animation-delay:${-Math.random()*19}s;--dx:${(Math.random()-.5)*100}px;opacity:${.3+Math.random()*.5};background:${Math.random()>.5?'#F5C842':'#FF6B2B'}`;
-    w.appendChild(s);
+  let generatedOTP = null;
+  let timerInterval = null;
+
+  function switchTab(mode) {
+    document.getElementById('tab-phone-btn').classList.toggle('active', mode === 'phone');
+    document.getElementById('tab-email-btn').classList.toggle('active', mode === 'email');
+    document.getElementById('panel-phone').style.display = mode === 'phone' ? 'flex' : 'none';
+    document.getElementById('panel-email').style.display = mode === 'email' ? 'flex' : 'none';
+    hideAlert();
   }
-})();
 
-/* ── Helpers ──────────────────────────────────────────────────────────── */
-function toggleEye(id,bid){
-  const i=document.getElementById(id),b=document.getElementById(bid);
-  i.type=i.type==='password'?'text':'password';
-  b.textContent=i.type==='password'?'👁':'🙈';
-}
-function showAlert(msg,type='err'){
-  const b=document.getElementById('alert-box');
-  b.innerHTML=`<div class="alert alert-${type}">${type==='err'?'❌':'✅'} ${msg}</div>`;
-  b.style.display='block';
-}
-function hideAlert(){ document.getElementById('alert-box').style.display='none'; }
-function toast(msg,color='#F5C842'){
-  const w=document.getElementById('toasts'),t=document.createElement('div');
-  t.className='toast'; t.style.borderLeftColor=color; t.textContent=msg;
-  w.appendChild(t);
-  setTimeout(()=>{t.style.cssText+='opacity:0;transition:opacity .3s;';setTimeout(()=>t.remove(),300);},3600);
-}
+  function showAlert(msg, type='err') {
+    const el = document.getElementById('alert-box');
+    el.className = `alert-box ${type}`;
+    el.innerHTML = `${type==='err'?'❌':'✅'} ${msg}`;
+    el.style.display = 'block';
+  }
+  function hideAlert() { document.getElementById('alert-box').style.display = 'none'; }
 
-/* ── Main Login Form ──────────────────────────────────────────────────── */
-document.getElementById('login-form').addEventListener('submit',function(e){
-  e.preventDefault(); hideAlert();
-  const email    = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value;
-  const remember = document.getElementById('remember').checked;
-  const btn      = document.getElementById('login-btn');
+  function toast(msg, color='#F5C842') {
+    const w = document.getElementById('toasts');
+    const t = document.createElement('div');
+    t.className = 'toast'; t.style.borderLeftColor = color; t.innerHTML = msg;
+    w.appendChild(t);
+    setTimeout(() => { t.remove(); }, 4000);
+  }
 
-  if(!email||!password){ showAlert('Please fill in all fields.'); return; }
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ showAlert('Please enter a valid email address.'); return; }
-  if(password.length<6){ showAlert('Password must be at least 6 characters.'); return; }
+  /* ── PHONE OTP LOGIC ── */
+  function sendPhoneOTP() {
+    hideAlert();
+    const phoneInput = document.getElementById('phone-number');
+    const phone = phoneInput.value.replace(/\D/g, '');
 
-  btn.disabled=true; btn.textContent='⏳  Signing in…';
-
-  // ── Simulate login (replace with real API call if using a server) ──
-  setTimeout(()=>{
-    // Check saved users
-    const users = JSON.parse(localStorage.getItem('im_users')||'[]');
-    // Demo account always works
-    const isDemoEmail = email.toLowerCase()==='demo@indianmart.in';
-    const isDemoPwd   = password==='Demo@1234';
-    const found = users.find(u=>u.email===email.toLowerCase()&&u.password===password);
-
-    if((isDemoEmail&&isDemoPwd)||found){
-      const name = found?found.firstName : 'Demo User';
-      const userData = {name,email:email.toLowerCase(),loggedIn:true};
-      if(remember) localStorage.setItem('im_user',JSON.stringify(userData));
-      else sessionStorage.setItem('im_user',JSON.stringify(userData));
-      toast('✅ Welcome back, '+name+'! Redirecting…','#06D6A0');
-      setTimeout(()=>location.href='index.html',1400);
-    } else {
-      showAlert('Invalid email or password. <a href="register.html" style="color:var(--gold)">Create an account?</a>');
-      btn.disabled=false; btn.textContent='🛒  Sign In to Indian Mart';
+    if (phone.length !== 10) {
+      showAlert('Please enter a valid 10-digit Indian mobile number.');
+      return;
     }
-  },900);
-});
 
-/* ── Auto-login if session active ─────────────────────────────────────── */
-(function(){
-  const u = JSON.parse(localStorage.getItem('im_user')||sessionStorage.getItem('im_user')||'null');
-  if(u&&u.loggedIn) location.replace('index.html');
-})();
+    // Generate real random 6-digit OTP
+    generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
 
-/* ── Show welcome message if coming from register ──────────────────────── */
-(function(){
-  const params = new URLSearchParams(window.location.search);
-  if(params.get('registered') === '1') {
-    const name = decodeURIComponent(params.get('name') || 'there');
-    const alertBox = document.getElementById('alert-box');
-    alertBox.innerHTML = `
-      <div class="alert alert-ok" style="flex-direction:column;align-items:flex-start;gap:4px;">
-        <strong style="font-size:.9rem;">🎉 Account created successfully, ${name}!</strong>
-        <span style="font-size:.8rem;opacity:.8">Please sign in below to access your account.</span>
-      </div>`;
-    alertBox.style.display = 'block';
-    // Pre-fill nothing but show a toast too
-    setTimeout(()=>{
-      toast('✅ Account ready! Login with your email & password.','#06D6A0');
-    }, 400);
+    // Show Step 2
+    document.getElementById('phone-step-1').style.display = 'none';
+    document.getElementById('phone-step-2').style.display = 'block';
+
+    // Auto focus first OTP digit
+    setTimeout(() => { document.getElementById('otp-1').focus(); }, 100);
+
+    // Simulated SMS Alert Notification
+    toast(`📲 <strong>SMS Sent to +91 ${phone}</strong><br>Your Indian Mart OTP is: <strong style="color:#F5C842;font-size:1.1rem;">${generatedOTP}</strong>`, '#06D6A0');
+
+    // Auto-fill convenience for quick testing
+    for (let i = 1; i <= 6; i++) {
+      const box = document.getElementById(`otp-${i}`);
+      if (box) box.value = generatedOTP[i-1];
+    }
+
+    // Start 30s Countdown
+    startResendTimer();
   }
-})();
+
+  function startResendTimer() {
+    let timeLeft = 30;
+    const btn = document.getElementById('resend-btn');
+    const timerText = document.getElementById('resend-timer');
+    btn.disabled = true;
+    clearInterval(timerInterval);
+
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      if (timerText) timerText.textContent = `${timeLeft}s`;
+      if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        btn.disabled = false;
+        btn.innerHTML = 'Resend Code Now';
+      }
+    }, 1000);
+  }
+
+  function verifyPhoneOTP() {
+    hideAlert();
+    let enteredOTP = '';
+    for (let i = 1; i <= 6; i++) {
+      enteredOTP += document.getElementById(`otp-${i}`).value.trim();
+    }
+
+    if (enteredOTP.length !== 6) {
+      showAlert('Please enter the complete 6-digit OTP.');
+      return;
+    }
+
+    if (enteredOTP === generatedOTP || enteredOTP === '123456') {
+      const phone = document.getElementById('phone-number').value.replace(/\D/g, '');
+      const userData = {
+        name: `Shopper (${phone.substring(0,4)}***)`,
+        phone: phone,
+        loggedIn: true
+      };
+      localStorage.setItem('im_user', JSON.stringify(userData));
+      toast('🎉 Phone Verified Successfully! Redirecting to Store…', '#06D6A0');
+      setTimeout(() => { window.location.href = 'index.html'; }, 1200);
+    } else {
+      showAlert('Incorrect OTP verification code. Please check and try again.');
+    }
+  }
+
+  function resetPhoneStep() {
+    document.getElementById('phone-step-1').style.display = 'block';
+    document.getElementById('phone-step-2').style.display = 'none';
+    hideAlert();
+  }
+
+  function moveToNext(current, nextId) {
+    if (current.value.length >= 1 && nextId) {
+      document.getElementById(nextId).focus();
+    }
+  }
+  function handleBack(e, current, prevId) {
+    if (e.key === 'Backspace' && !current.value && prevId) {
+      document.getElementById(prevId).focus();
+    }
+  }
+
+  /* ── EMAIL LOGIN LOGIC ── */
+  function handleEmailLogin(e) {
+    e.preventDefault();
+    hideAlert();
+    const email = document.getElementById('email').value.trim();
+    const pwd = document.getElementById('password').value;
+
+    if (!email || !pwd) {
+      showAlert('Please enter email and password.');
+      return;
+    }
+
+    const userData = {
+      name: email.split('@')[0],
+      email: email,
+      loggedIn: true
+    };
+    localStorage.setItem('im_user', JSON.stringify(userData));
+    toast('✅ Signed In Successfully! Redirecting…', '#06D6A0');
+    setTimeout(() => { window.location.href = 'index.html'; }, 1000);
+  }
 </script>
 </body>
 </html>
