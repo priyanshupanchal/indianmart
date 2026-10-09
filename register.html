@@ -449,16 +449,29 @@
       return;
     }
 
-    const userData = {
+    // Save to registered users list (Do NOT auto login)
+    const registeredUsers = JSON.parse(localStorage.getItem('im_users') || '[]');
+    const existingIndex = registeredUsers.findIndex(u => u.phone === phone || u.email === email);
+    const newUser = {
+      firstName: firstName,
+      lastName: lastName,
       name: `${firstName} ${lastName}`,
       email: email,
       phone: phone,
-      loggedIn: true
+      password: password
     };
-    localStorage.setItem('im_user', JSON.stringify(userData));
 
-    toast('🎉 Account Created & Verified Successfully! Redirecting to Store…', '#06D6A0');
-    setTimeout(() => { window.location.href = 'index.html'; }, 1300);
+    if (existingIndex > -1) {
+      registeredUsers[existingIndex] = newUser;
+    } else {
+      registeredUsers.push(newUser);
+    }
+    localStorage.setItem('im_users', JSON.stringify(registeredUsers));
+
+    toast('🎉 Account Registered Successfully! Redirecting to Sign In…', '#06D6A0');
+    setTimeout(() => {
+      window.location.href = `login.html?registered=1&phone=${encodeURIComponent(phone)}&name=${encodeURIComponent(firstName)}`;
+    }, 1400);
   }
 </script>
 </body>

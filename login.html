@@ -456,6 +456,20 @@
     toast('✅ Signed In Successfully! Redirecting…', '#06D6A0');
     setTimeout(() => { window.location.href = 'index.html'; }, 1000);
   }
+
+  /* ── Check if coming from Registration ── */
+  window.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('registered') === '1') {
+      const name = decodeURIComponent(params.get('name') || 'Shopper');
+      const phone = decodeURIComponent(params.get('phone') || '');
+      showAlert(`🎉 Account verified & created successfully, ${name}! Please sign in below to continue.`, 'ok');
+      if (phone) {
+        const phoneInp = document.getElementById('phone-number');
+        if (phoneInp) phoneInp.value = phone;
+      }
+    }
+  });
 </script>
 </body>
 </html>
