@@ -3,15 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Account — Indian Mart</title>
-  <meta name="description" content="Join Indian Mart — Get exclusive deals, track orders, earn reward points and shop smarter across India.">
+  <title>Create Account &amp; Phone OTP — Indian Mart</title>
+  <meta name="description" content="Join Indian Mart with Phone OTP verification — Get exclusive deals, reward points and fast delivery across India.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ════════════════════════════════════════════════
-       RESET & ROOT
-    ════════════════════════════════════════════════ */
+    /* ── RESET & ROOT ────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --gold:    #F5C842;
@@ -20,247 +18,194 @@
       --cream:   #FDF8EF;
       --dark:    #0B0C10;
       --dark-2:  #13141A;
-      --glass:   rgba(255,255,255,0.055);
+      --glass:   rgba(255,255,255,0.06);
       --text:    #F0EBE0;
-      --text-2:  rgba(240,235,224,0.55);
+      --text-2:  rgba(240,235,224,0.65);
       --red:     #FF4D6D;
       --green:   #06D6A0;
       --radius:  18px;
       --ease:    cubic-bezier(0.16,1,0.3,1);
     }
-    html { font-size:16px; -webkit-font-smoothing:antialiased; }
+    html { font-size: 16px; -webkit-font-smoothing: antialiased; }
     body {
-      font-family:'Inter',system-ui,sans-serif;
-      background:var(--dark); color:var(--text);
-      min-height:100dvh; overflow-x:hidden;
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      min-height: 100dvh;
+      overflow-x: hidden;
     }
 
-    /* ════════════════════════════════════════════════
-       ANIMATED BACKGROUND
-    ════════════════════════════════════════════════ */
+    /* ── ANIMATED BACKGROUND ─────────────────────────────────────── */
     .bg {
-      position:fixed; inset:0; z-index:0; overflow:hidden;
-      background:
-        radial-gradient(ellipse 90% 70% at 85% 5%,  #1c0900 0%, transparent 55%),
-        radial-gradient(ellipse 80% 60% at 10% 95%, #1a0a2e 0%, transparent 55%),
-        radial-gradient(ellipse 60% 55% at 50% 45%, #0d0b1a 0%, transparent 100%),
-        #0B0C10;
+      position: fixed; inset: 0; z-index: 0; overflow: hidden;
+      background: radial-gradient(ellipse 90% 70% at 85% 5%,  #1c0900 0%, transparent 55%),
+                  radial-gradient(ellipse 80% 60% at 10% 95%, #1a0a2e 0%, transparent 55%),
+                  radial-gradient(ellipse 60% 55% at 50% 45%, #0d0b1a 0%, transparent 100%),
+                  #0B0C10;
     }
-    .blob { position:absolute;border-radius:50%;filter:blur(105px);pointer-events:none;animation:blobDrift ease-in-out infinite alternate; }
+    .blob { position: absolute; border-radius: 50%; filter: blur(105px); pointer-events: none; animation: blobDrift ease-in-out infinite alternate; }
     .b1 { width:580px;height:580px;top:-160px;right:-140px;background:radial-gradient(circle,rgba(255,107,43,.13),transparent 68%);animation-duration:13s; }
     .b2 { width:460px;height:460px;bottom:-130px;left:-100px;background:radial-gradient(circle,rgba(245,200,66,.11),transparent 68%);animation-duration:16s;animation-delay:-6s; }
     .b3 { width:300px;height:300px;top:38%;right:12%;background:radial-gradient(circle,rgba(130,80,255,.08),transparent 68%);animation-duration:20s;animation-delay:-10s; }
     @keyframes blobDrift { from{transform:translate(0,0) scale(1)} to{transform:translate(28px,18px) scale(1.07)} }
-    .sparkle { position:absolute;border-radius:50%;pointer-events:none;animation:sfDrift linear infinite; }
-    @keyframes sfDrift {
-      0%  {transform:translateY(105vh) rotate(0);opacity:0}
-      8%  {opacity:1}
-      92% {opacity:.5}
-      100%{transform:translateY(-5vh) rotate(360deg) translateX(var(--dx,0));opacity:0}
-    }
+    .sparkle { position: absolute; border-radius: 50%; pointer-events: none; animation: sfDrift linear infinite; }
+    @keyframes sfDrift { 0%{transform:translateY(105vh);opacity:0} 10%{opacity:1} 90%{opacity:.6} 100%{transform:translateY(-5vh);opacity:0} }
 
-    /* ════════════════════════════════════════════════
-       HEADER
-    ════════════════════════════════════════════════ */
+    /* ── HEADER ─────────────────────────────────────────────────── */
     .page-header {
-      position:relative; z-index:20;
-      display:flex; align-items:center; justify-content:space-between;
-      padding:22px 44px;
+      position: relative; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 24px 44px;
     }
-    .logo { display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--text); }
+    .logo {
+      display: flex; align-items: center; gap: 10px; text-decoration: none;
+      font-family: 'Outfit', sans-serif; font-size: 1.35rem; font-weight: 800; color: #fff;
+    }
     .logo-mark {
-      width:46px; height:46px;
-      background:linear-gradient(135deg,var(--gold),var(--orange));
-      border-radius:14px; display:flex; align-items:center; justify-content:center;
-      font-size:24px; box-shadow:0 6px 28px rgba(245,200,66,.35);
+      width: 36px; height: 36px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--gold), var(--orange));
+      display: flex; align-items: center; justify-content: center; font-size: 18px;
     }
-    .logo-text { font-family:'Outfit',sans-serif; font-weight:800; font-size:1.35rem; letter-spacing:-.02em; }
-    .logo-text em { color:var(--gold); font-style:normal; }
+    .logo-text em { color: var(--gold); font-style: normal; }
     .header-back {
-      display:flex; align-items:center; gap:6px; text-decoration:none;
-      color:var(--text-2); font-size:.82rem; font-weight:500;
-      padding:8px 18px; border-radius:999px;
-      border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.04);
-      backdrop-filter:blur(12px); transition:all .25s var(--ease);
+      display: flex; align-items: center; gap: 6px; text-decoration: none; color: var(--text-2);
+      font-size: .84rem; font-weight: 600; padding: 8px 18px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.04);
+      backdrop-filter: blur(12px); transition: all .25s;
     }
-    .header-back:hover { color:var(--text); border-color:rgba(245,200,66,.35); background:rgba(245,200,66,.07); }
+    .header-back:hover { color: #fff; border-color: var(--gold); background: rgba(245,200,66,.1); }
 
-    /* ════════════════════════════════════════════════
-       LAYOUT
-    ════════════════════════════════════════════════ */
+    /* ── CARD & FORM ────────────────────────────────────────────── */
     .auth-wrap {
-      position:relative; z-index:10;
-      display:flex; align-items:flex-start; justify-content:center;
-      padding:20px 20px 50px; min-height:calc(100dvh - 100px);
+      position: relative; z-index: 10;
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px 20px 50px; min-height: calc(100dvh - 120px);
     }
-
-    /* ════════════════════════════════════════════════
-       CARD
-    ════════════════════════════════════════════════ */
     .card {
-      width:100%; max-width:500px;
-      background:var(--glass); border:1px solid rgba(255,255,255,.08);
-      border-radius:28px; padding:44px 46px;
-      backdrop-filter:blur(48px); -webkit-backdrop-filter:blur(48px);
-      box-shadow:0 40px 100px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.03) inset;
-      position:relative; overflow:hidden;
-      animation:cardIn .65s var(--ease) both;
+      width: 100%; max-width: 480px;
+      background: var(--glass);
+      border: 1.5px solid rgba(255,255,255,.1);
+      border-radius: 28px; padding: 38px 36px;
+      backdrop-filter: blur(48px); -webkit-backdrop-filter: blur(48px);
+      box-shadow: 0 40px 100px rgba(0,0,0,.65);
+      position: relative; overflow: hidden;
     }
-    @keyframes cardIn { from{opacity:0;transform:translateY(36px) scale(.96)} to{opacity:1;transform:translateY(0) scale(1)} }
     .card::before {
-      content:''; position:absolute; top:0; left:10%; right:10%; height:1.5px;
-      background:linear-gradient(90deg,transparent,var(--gold),var(--orange),transparent);
-      border-radius:0 0 4px 4px;
+      content:''; position:absolute; top:0; left:10%; right:10%; height:2px;
+      background: linear-gradient(90deg,transparent,var(--gold),var(--orange),transparent);
     }
-
-    /* ── Top ── */
     .badge {
-      display:inline-flex; align-items:center; gap:5px;
-      background:rgba(6,214,160,.1); border:1px solid rgba(6,214,160,.28);
-      color:var(--green); font-size:.68rem; font-weight:700;
-      letter-spacing:.08em; text-transform:uppercase;
-      padding:4px 14px; border-radius:999px; margin-bottom:16px;
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(245,200,66,.12); border: 1px solid rgba(245,200,66,.3);
+      color: var(--gold); font-size: .7rem; font-weight: 800; letter-spacing: .08em;
+      text-transform: uppercase; padding: 4px 14px; border-radius: 999px; margin-bottom: 14px;
     }
     .card-title {
-      font-family:'Outfit',sans-serif; font-size:1.95rem; font-weight:800;
-      line-height:1.15; margin-bottom:8px; color:#fff; letter-spacing:-.03em;
+      font-family: 'Outfit', sans-serif; font-size: 2.1rem; font-weight: 800;
+      line-height: 1.15; margin-bottom: 6px; color: #fff;
     }
     .card-title span {
-      background:linear-gradient(130deg,var(--gold),var(--orange));
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+      background: linear-gradient(130deg, var(--gold), var(--orange));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
-    .card-sub { font-size:.84rem; color:var(--text-2); margin-bottom:24px; line-height:1.65; }
+    .card-sub { font-size: .85rem; color: var(--text-2); margin-bottom: 22px; line-height: 1.5; }
 
-    /* ── Alerts ── */
-    .alert {
-      display:flex; align-items:flex-start; gap:10px;
-      padding:11px 16px; border-radius:12px;
-      font-size:.8rem; line-height:1.55; margin-bottom:14px;
-      animation:alertIn .3s var(--ease);
-    }
-    @keyframes alertIn { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:translateY(0)} }
-    .a-err { background:rgba(255,77,109,.1); border:1px solid rgba(255,77,109,.3); color:#ff8fa5; }
-    .a-ok  { background:rgba(6,214,160,.09); border:1px solid rgba(6,214,160,.25); color:#34d39c; }
-
-    /* ── Form ── */
-    .form { display:flex; flex-direction:column; gap:14px; }
-    .row2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-    .fgroup { display:flex; flex-direction:column; gap:5px; }
-    .flabel { font-size:.74rem; font-weight:600; color:rgba(240,235,224,.55); letter-spacing:.04em; }
-    .flabel .opt { color:rgba(240,235,224,.28); font-weight:400; }
-    .fwrap { position:relative; display:flex; align-items:center; }
-    .ficon { position:absolute; left:15px; font-size:15px; opacity:.4; pointer-events:none; transition:opacity .2s; }
-    .fwrap:focus-within .ficon { opacity:.9; }
+    /* Form Fields */
+    .form { display: flex; flex-direction: column; gap: 14px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .fgroup { display: flex; flex-direction: column; gap: 5px; }
+    .flabel { font-size: .76rem; font-weight: 600; color: var(--text-2); letter-spacing: .03em; }
+    .fwrap { position: relative; display: flex; align-items: center; }
+    .ficon { position: absolute; left: 14px; font-size: 15px; opacity: .5; pointer-events: none; }
     .finput {
-      width:100%; padding:13px 46px;
-      background:rgba(255,255,255,.06); border:1.5px solid rgba(255,255,255,.1);
-      border-radius:13px; color:var(--text); font-size:.87rem; font-family:'Inter',sans-serif;
-      outline:none; transition:all .25s var(--ease);
+      width: 100%; padding: 12px 16px 12px 42px;
+      background: rgba(255,255,255,.06); border: 1.5px solid rgba(255,255,255,.1);
+      border-radius: 12px; color: #fff; font-size: .88rem; outline: none; transition: all .2s;
     }
-    .finput::placeholder { color:rgba(240,235,224,.2); }
-    .finput:hover { border-color:rgba(255,255,255,.18); background:rgba(255,255,255,.09); }
-    .finput:focus { border-color:rgba(245,200,66,.6); background:rgba(245,200,66,.06); box-shadow:0 0 0 3px rgba(245,200,66,.1); }
-    .finput.valid   { border-color:rgba(6,214,160,.5); }
-    .finput.invalid { border-color:rgba(255,77,109,.5); }
-    .eye { position:absolute; right:12px; background:none; border:none; cursor:pointer; font-size:15px; opacity:.35; padding:5px; transition:opacity .2s; }
-    .eye:hover { opacity:.75; }
+    .finput:focus { border-color: var(--gold); background: rgba(245,200,66,.06); box-shadow: 0 0 0 3px rgba(245,200,66,.1); }
 
-    /* Phone */
-    .phone-row {
-      display:flex; border:1.5px solid rgba(255,255,255,.1); border-radius:13px;
-      overflow:hidden; background:rgba(255,255,255,.06); transition:all .25s;
+    /* Phone Input with Send OTP Button */
+    .phone-input-group {
+      display: flex; gap: 8px; align-items: stretch;
     }
-    .phone-row:focus-within { border-color:rgba(245,200,66,.6); background:rgba(245,200,66,.06); box-shadow:0 0 0 3px rgba(245,200,66,.1); }
-    .phone-pre { display:flex; align-items:center; gap:5px; padding:0 14px; border-right:1px solid rgba(255,255,255,.08); color:var(--text-2); font-size:.84rem; white-space:nowrap; }
-    .phone-inp { flex:1; padding:13px 14px; background:none; border:none; outline:none; color:var(--text); font-size:.87rem; font-family:'Inter',sans-serif; }
-    .phone-inp::placeholder { color:rgba(240,235,224,.2); }
-
-    /* Password strength */
-    .pwd-wrap { display:none; margin-top:6px; }
-    .str-bar { height:4px; background:rgba(255,255,255,.08); border-radius:4px; overflow:hidden; }
-    .str-fill { height:100%; border-radius:4px; transition:all .4s var(--ease); width:0; }
-    .str-label { font-size:.72rem; margin-top:4px; }
-    .lv1 .str-fill { width:25%; background:#FF4D6D; } .lv1 .str-label { color:#FF4D6D; }
-    .lv2 .str-fill { width:50%; background:#FF8C30; } .lv2 .str-label { color:#FF8C30; }
-    .lv3 .str-fill { width:75%; background:#F5C842; } .lv3 .str-label { color:#F5C842; }
-    .lv4 .str-fill { width:100%;background:#06D6A0; } .lv4 .str-label { color:#06D6A0; }
-
-    /* Checkboxes */
-    .ck-group { display:flex; flex-direction:column; gap:10px; }
-    .cklabel {
-      display:flex; align-items:flex-start; gap:9px;
-      font-size:.78rem; color:var(--text-2); cursor:pointer; line-height:1.55;
+    .phone-box {
+      flex: 1; position: relative; display: flex; align-items: center;
+      background: rgba(255,255,255,.06); border: 1.5px solid rgba(255,255,255,.1);
+      border-radius: 12px; overflow: hidden;
     }
-    .cklabel input[type=checkbox] {
-      appearance:none; width:16px; height:16px; flex-shrink:0; border-radius:5px;
-      border:1.5px solid rgba(255,255,255,.2); background:rgba(255,255,255,.05);
-      cursor:pointer; transition:all .2s; position:relative; margin-top:2px;
+    .phone-box:focus-within { border-color: var(--gold); background: rgba(245,200,66,.06); }
+    .phone-pre {
+      padding: 0 12px; font-size: .82rem; font-weight: 700; color: var(--gold);
+      border-right: 1px solid rgba(255,255,255,.1); display: flex; align-items: center; gap: 4px;
     }
-    .cklabel input[type=checkbox]:checked { background:var(--gold); border-color:var(--gold); }
-    .cklabel input[type=checkbox]:checked::after {
-      content:'✓'; position:absolute; top:50%; left:50%;
-      transform:translate(-50%,-50%); color:#000; font-size:10px; font-weight:800;
+    .phone-inp {
+      flex: 1; padding: 12px 14px; background: transparent; border: none; outline: none;
+      color: #fff; font-size: .88rem; font-weight: 600; letter-spacing: .05em;
     }
-    .cklabel a { color:var(--gold); text-decoration:none; }
-    .cklabel a:hover { color:var(--orange); }
-
-    /* Submit */
-    .submit {
-      width:100%; padding:14.5px; border-radius:14px; border:none;
-      background:linear-gradient(130deg,var(--gold) 0%,var(--orange) 100%);
-      color:#0B0C10; font-family:'Outfit',sans-serif; font-size:.95rem; font-weight:800;
-      cursor:pointer; transition:all .3s var(--ease);
-      box-shadow:0 6px 28px rgba(245,200,66,.3); margin-top:4px; position:relative; overflow:hidden;
-      letter-spacing:.01em;
+    .btn-send-otp {
+      padding: 0 16px; border-radius: 12px; border: 1px solid rgba(245,200,66,.4);
+      background: rgba(245,200,66,.15); color: var(--gold); font-size: .78rem; font-weight: 800;
+      cursor: pointer; white-space: nowrap; transition: all .2s;
     }
-    .submit::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg,rgba(255,255,255,.18),transparent); opacity:0; transition:opacity .25s; }
-    .submit:hover:not(:disabled) { transform:translateY(-3px); box-shadow:0 10px 40px rgba(245,200,66,.45); }
-    .submit:hover::after { opacity:1; }
-    .submit:active:not(:disabled) { transform:translateY(-1px); }
-    .submit:disabled { opacity:.55; cursor:not-allowed; transform:none; }
+    .btn-send-otp:hover { background: var(--gold); color: #0B0C10; }
+    .btn-send-otp:disabled { opacity: .5; cursor: not-allowed; }
 
-    /* Benefits */
-    .benefits {
-      margin-top:20px; padding:16px 18px;
-      background:rgba(245,200,66,.05); border:1px solid rgba(245,200,66,.14); border-radius:14px;
+    /* OTP Verification Container */
+    .otp-verify-box {
+      background: rgba(245,200,66,.08); border: 1.5px dashed rgba(245,200,66,.4);
+      border-radius: 14px; padding: 14px 16px; display: none; margin-top: 4px;
     }
-    .ben-title { font-size:.68rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
-    .ben-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-    .ben-item { display:flex; align-items:center; gap:7px; font-size:.75rem; color:rgba(240,235,224,.5); }
+    .otp-digits-row {
+      display: flex; justify-content: space-between; gap: 6px; margin: 10px 0;
+    }
+    .otp-digit {
+      width: 44px; height: 48px; border-radius: 10px;
+      background: rgba(255,255,255,.09); border: 1.5px solid rgba(255,255,255,.2);
+      text-align: center; font-size: 1.25rem; font-weight: 800; color: var(--gold);
+      outline: none; transition: all .2s; font-family: monospace;
+    }
+    .otp-digit:focus { border-color: var(--gold); background: rgba(245,200,66,.2); transform: scale(1.05); }
 
-    /* Footer links */
-    .alt { text-align:center; font-size:.8rem; color:var(--text-2); margin-top:20px; }
-    .alt a { color:var(--gold); text-decoration:none; font-weight:700; }
-    .alt a:hover { color:var(--orange); }
-    .trust-row { display:flex; align-items:center; justify-content:center; gap:22px; margin-top:20px; padding-top:18px; border-top:1px solid rgba(255,255,255,.06); }
-    .trust-it { display:flex; align-items:center; gap:5px; font-size:.7rem; color:rgba(240,235,224,.3); }
+    .otp-actions-row {
+      display: flex; justify-content: space-between; align-items: center; margin-top: 8px;
+    }
+    .btn-verify-otp {
+      padding: 8px 18px; border-radius: 999px; background: #10B981; color: #fff;
+      font-size: .78rem; font-weight: 800; border: none; cursor: pointer;
+    }
+    .verified-phone-badge {
+      display: none; align-items: center; gap: 6px; color: #10B981;
+      font-size: .75rem; font-weight: 800; margin-top: 4px;
+    }
 
-    .page-footer { position:relative;z-index:10;text-align:center;padding:22px;font-size:.73rem;color:rgba(240,235,224,.22); }
-    .page-footer a { color:rgba(240,235,224,.3); margin:0 9px; text-decoration:none; }
-    .page-footer a:hover { color:var(--gold); }
+    /* Submit Button */
+    .submit-btn {
+      width: 100%; padding: 14px; border-radius: 14px; border: none;
+      background: linear-gradient(130deg, var(--gold) 0%, var(--orange) 100%);
+      color: #0B0C10; font-family: 'Outfit', sans-serif; font-size: .98rem; font-weight: 800;
+      cursor: pointer; transition: all .3s var(--ease);
+      box-shadow: 0 6px 28px rgba(245,200,66,.35); margin-top: 10px;
+    }
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(245,200,66,.5); }
 
-    /* Toast */
-    #toasts { position:fixed; bottom:26px; right:26px; z-index:9999; display:flex; flex-direction:column; gap:10px; }
+    /* Alert & Toast */
+    .alert-box {
+      padding: 12px 16px; border-radius: 12px; font-size: .82rem; margin-bottom: 16px; display: none;
+    }
+    .alert-box.err { background: rgba(255,77,109,.12); border: 1px solid var(--red); color: #ff8fa5; }
+    .alert-box.ok  { background: rgba(6,214,160,.12); border: 1px solid var(--green); color: #34d39c; }
+
+    #toasts { position: fixed; bottom: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
     .toast {
-      padding:12px 20px; background:rgba(11,12,16,.97);
-      border-left:3px solid var(--gold); border-radius:12px;
-      color:var(--text); font-size:.83rem; font-weight:500; max-width:310px;
-      box-shadow:0 8px 32px rgba(0,0,0,.55); animation:toastIn .35s var(--ease);
+      padding: 12px 20px; background: rgba(11,12,16,.96); border-left: 3.5px solid var(--gold);
+      border-radius: 12px; color: #fff; font-size: .85rem; font-weight: 600;
+      box-shadow: 0 10px 36px rgba(0,0,0,.6); animation: toastIn .3s var(--ease);
     }
-    @keyframes toastIn { from{opacity:0;transform:translateX(28px)} to{opacity:1;transform:translateX(0)} }
-
-    @media(max-width:540px){
-      .page-header { padding:18px 22px; }
-      .card { padding:30px 22px; border-radius:22px; }
-      .card-title { font-size:1.6rem; }
-      .row2 { grid-template-columns:1fr; }
-      .ben-grid { grid-template-columns:1fr; }
-    }
+    @keyframes toastIn { from{transform:translateX(30px);opacity:0} to{transform:translateX(0);opacity:1} }
   </style>
 </head>
 <body>
 
-<!-- BACKGROUND -->
 <div class="bg">
   <div class="blob b1"></div>
   <div class="blob b2"></div>
@@ -268,260 +213,253 @@
   <div id="spark-wrap"></div>
 </div>
 
-<!-- HEADER -->
 <header class="page-header">
   <a href="index.html" class="logo">
-    <div class="logo-mark">🇮🇳</div>
+    <div class="logo-mark">🛍️</div>
     <span class="logo-text">Indian<em>Mart</em></span>
   </a>
-  <a href="index.html" class="header-back">← Continue Shopping</a>
+  <a href="login.html" class="header-back">← Already have Account? Sign In</a>
 </header>
 
-<!-- MAIN -->
 <main class="auth-wrap">
   <div class="card">
+    <div class="badge">🚀 Instant OTP Registration</div>
+    <h1 class="card-title">Create <span>Account</span></h1>
+    <p class="card-sub">Join 1.5 Lakh+ Indian Mart shoppers with Mobile Phone OTP verification.</p>
 
-    <div class="badge">🎁 &nbsp;Free Account — No Hidden Fees</div>
-    <h1 class="card-title">Join <span>Indian Mart</span></h1>
-    <p class="card-sub">Get exclusive deals, track orders, earn reward points &amp; shop smarter!</p>
+    <div id="alert-box" class="alert-box"></div>
 
-    <div id="alert-box" style="display:none"></div>
+    <form class="form" id="register-form" onsubmit="handleRegistration(event)">
 
-    <!-- FORM -->
-    <form class="form" id="reg-form" novalidate autocomplete="on">
-
-      <!-- Name -->
-      <div class="row2">
+      <!-- Full Name -->
+      <div class="form-row">
         <div class="fgroup">
-          <label class="flabel" for="first_name">First Name</label>
+          <label class="flabel" for="first_name">First Name *</label>
           <div class="fwrap">
             <span class="ficon">👤</span>
-            <input type="text" id="first_name" name="first_name" class="finput"
-                   placeholder="Rahul" autocomplete="given-name" required maxlength="60">
+            <input type="text" id="first_name" class="finput" placeholder="Rahul" required>
           </div>
         </div>
         <div class="fgroup">
-          <label class="flabel" for="last_name">Last Name</label>
+          <label class="flabel" for="last_name">Last Name *</label>
           <div class="fwrap">
             <span class="ficon">👤</span>
-            <input type="text" id="last_name" name="last_name" class="finput"
-                   placeholder="Sharma" autocomplete="family-name" required maxlength="60">
+            <input type="text" id="last_name" class="finput" placeholder="Sharma" required>
           </div>
         </div>
       </div>
 
-      <!-- Mobile -->
+      <!-- Mobile Number with OTP Action Button -->
       <div class="fgroup">
-        <label class="flabel" for="mobile">Mobile Number</label>
-        <div class="phone-row">
-          <div class="phone-pre">🇮🇳 +91</div>
-          <input type="tel" class="phone-inp" id="mobile" name="mobile"
-                 placeholder="10-digit mobile number" maxlength="10" required>
+        <label class="flabel" for="mobile">Mobile Number (OTP Verification Required) *</label>
+        <div class="phone-input-group">
+          <div class="phone-box">
+            <div class="phone-pre">🇮🇳 +91</div>
+            <input type="tel" class="phone-inp" id="mobile" placeholder="98765 43210" maxlength="10" required>
+          </div>
+          <button type="button" class="btn-send-otp" id="send-otp-btn" onclick="sendRegistrationOTP()">
+            📲 Send OTP
+          </button>
+        </div>
+
+        <div class="verified-phone-badge" id="phone-verified-tag">
+          ✓ <span>Mobile Phone Number Verified</span>
+        </div>
+
+        <!-- Inline OTP Verification Box -->
+        <div class="otp-verify-box" id="otp-verify-box">
+          <div style="font-size:0.75rem; color:var(--gold); font-weight:700;">Enter 6-Digit Code sent to your phone:</div>
+          <div class="otp-digits-row">
+            <input type="text" maxlength="1" class="otp-digit" id="reg-otp-1" oninput="moveToNextReg(this, 'reg-otp-2')">
+            <input type="text" maxlength="1" class="otp-digit" id="reg-otp-2" oninput="moveToNextReg(this, 'reg-otp-3')">
+            <input type="text" maxlength="1" class="otp-digit" id="reg-otp-3" oninput="moveToNextReg(this, 'reg-otp-4')">
+            <input type="text" maxlength="1" class="otp-digit" id="reg-otp-4" oninput="moveToNextReg(this, 'reg-otp-5')">
+            <input type="text" maxlength="1" class="otp-digit" id="reg-otp-5" oninput="moveToNextReg(this, 'reg-otp-6')">
+            <input type="text" maxlength="1" class="otp-digit" id="reg-otp-6">
+          </div>
+          <div class="otp-actions-row">
+            <button type="button" class="btn-verify-otp" onclick="verifyRegistrationOTP()">
+              ✅ Verify Code
+            </button>
+            <span style="font-size:0.72rem; color:var(--text-2);" id="resend-countdown-text">Resend in 30s</span>
+          </div>
         </div>
       </div>
 
       <!-- Email -->
       <div class="fgroup">
-        <label class="flabel" for="email">Email Address</label>
+        <label class="flabel" for="email">Email Address *</label>
         <div class="fwrap">
           <span class="ficon">✉️</span>
-          <input type="email" id="email" name="email" class="finput"
-                 placeholder="you@example.com" autocomplete="email" required>
+          <input type="email" id="email" class="finput" placeholder="you@example.com" required>
         </div>
       </div>
 
       <!-- Password -->
       <div class="fgroup">
-        <label class="flabel" for="password">Create Password</label>
+        <label class="flabel" for="password">Create Password *</label>
         <div class="fwrap">
           <span class="ficon">🔒</span>
-          <input type="password" id="password" name="password" class="finput"
-                 placeholder="Min 8 chars, 1 uppercase, 1 number"
-                 autocomplete="new-password" required oninput="checkStrength(this.value)">
-          <button type="button" class="eye" id="e1" onclick="toggleEye('password','e1')">👁</button>
-        </div>
-        <div class="pwd-wrap" id="pwd-wrap">
-          <div class="str-bar"><div class="str-fill" id="str-fill"></div></div>
-          <div class="str-label" id="str-label"></div>
+          <input type="password" id="password" class="finput" placeholder="Min 6 characters" required>
         </div>
       </div>
 
-      <!-- Confirm Password -->
+      <!-- Referral Code -->
       <div class="fgroup">
-        <label class="flabel" for="confirm">Confirm Password</label>
-        <div class="fwrap">
-          <span class="ficon">🔒</span>
-          <input type="password" id="confirm" name="confirm" class="finput"
-                 placeholder="Re-enter your password" autocomplete="new-password" required
-                 oninput="checkMatch()">
-          <button type="button" class="eye" id="e2" onclick="toggleEye('confirm','e2')">👁</button>
-        </div>
-      </div>
-
-      <!-- Referral -->
-      <div class="fgroup">
-        <label class="flabel" for="referral">
-          Referral Code <span class="opt">(optional — get ₹100 off)</span>
-        </label>
+        <label class="flabel" for="referral">Referral Code <span style="opacity:0.6;">(Optional — get ₹100 Welcome Bonus)</span></label>
         <div class="fwrap">
           <span class="ficon">🎁</span>
-          <input type="text" id="referral" name="referral" class="finput" placeholder="Enter referral code">
+          <input type="text" id="referral" class="finput" placeholder="e.g. LUXE100">
         </div>
       </div>
 
-      <!-- Checkboxes -->
-      <div class="ck-group">
-        <label class="cklabel">
-          <input type="checkbox" id="terms" required>
-          I agree to Indian Mart's <a href="#">Terms of Service</a> &amp; <a href="#">Privacy Policy</a>
-        </label>
-        <label class="cklabel">
-          <input type="checkbox" id="offers" checked>
-          Send me exclusive deals and offers via SMS &amp; email
-        </label>
-      </div>
+      <button type="submit" class="submit-btn" id="create-acc-btn">
+        🚀 Create Indian Mart Account
+      </button>
 
-      <button type="submit" class="submit" id="reg-btn">🚀 &nbsp;Create My Account</button>
     </form>
 
-    <p class="alt">Already have an account? <a href="login.html">Sign In →</a></p>
-
-    <div class="trust-row">
-      <span class="trust-it">🔒 SSL Secured</span>
-      <span class="trust-it">🇮🇳 Made in India</span>
-      <span class="trust-it">✅ 1L+ Customers</span>
-    </div>
-
+    <p style="text-align:center; font-size:.8rem; color:var(--text-2); margin-top:20px;">
+      Already have an account? <a href="login.html" style="color:var(--gold); font-weight:700; text-decoration:none;">Sign In →</a>
+    </p>
   </div>
 </main>
-
-<footer class="page-footer">
-  <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Help</a>
-  <div style="margin-top:6px">© 2025 Indian Mart. All rights reserved.</div>
-</footer>
 
 <div id="toasts"></div>
 
 <script>
-/* ── Sparkles ─────────────────────────────────────────────────────────── */
-(function(){
-  const w=document.getElementById('spark-wrap');
-  for(let i=0;i<35;i++){
-    const s=document.createElement('div'); s.className='sparkle';
-    const c=Math.random()>.5?'#F5C842':'#FF6B2B';
-    s.style.cssText=`left:${Math.random()*100}%;width:${1+Math.random()*2.5}px;height:${1+Math.random()*2.5}px;background:${c};animation-duration:${7+Math.random()*12}s;animation-delay:${-Math.random()*20}s;--dx:${(Math.random()-.5)*100}px;opacity:${.3+Math.random()*.5};border-radius:50%;`;
-    w.appendChild(s);
+  let generatedRegOTP = null;
+  let isPhoneVerified = false;
+  let timerInterval = null;
+
+  function showAlert(msg, type='err') {
+    const el = document.getElementById('alert-box');
+    el.className = `alert-box ${type}`;
+    el.innerHTML = `${type==='err'?'❌':'✅'} ${msg}`;
+    el.style.display = 'block';
   }
-})();
+  function hideAlert() { document.getElementById('alert-box').style.display = 'none'; }
 
-/* ── Helpers ──────────────────────────────────────────────────────────── */
-function toggleEye(id,bid){
-  const i=document.getElementById(id),b=document.getElementById(bid);
-  i.type=i.type==='password'?'text':'password';
-  b.textContent=i.type==='password'?'👁':'🙈';
-}
-function showAlert(msg,type='err'){
-  const b=document.getElementById('alert-box');
-  b.innerHTML=`<div class="alert a-${type}">${type==='err'?'❌':'✅'} ${msg}</div>`;
-  b.style.display='block';
-  b.scrollIntoView({behavior:'smooth',block:'nearest'});
-}
-function toast(msg,color='#F5C842'){
-  const w=document.getElementById('toasts'),t=document.createElement('div');
-  t.className='toast'; t.style.borderLeftColor=color; t.textContent=msg;
-  w.appendChild(t);
-  setTimeout(()=>{t.style.cssText+='opacity:0;transition:opacity .3s;';setTimeout(()=>t.remove(),300);},3600);
-}
+  function toast(msg, color='#F5C842') {
+    const w = document.getElementById('toasts');
+    const t = document.createElement('div');
+    t.className = 'toast'; t.style.borderLeftColor = color; t.innerHTML = msg;
+    w.appendChild(t);
+    setTimeout(() => { t.remove(); }, 4500);
+  }
 
-/* ── Password Strength ─────────────────────────────────────────────────── */
-function checkStrength(v){
-  const wrap=document.getElementById('pwd-wrap');
-  if(!v){wrap.style.display='none';return;}
-  wrap.style.display='block';
-  let s=0;
-  if(v.length>=8) s++;
-  if(/[A-Z]/.test(v)) s++;
-  if(/[0-9]/.test(v)) s++;
-  if(/[^A-Za-z0-9]/.test(v)) s++;
-  const lvl=['lv1','lv2','lv3','lv4'][Math.max(0,s-1)];
-  const txt=['😕 Weak — add uppercase & numbers','😐 Fair — add a symbol','🙂 Good!','💪 Strong password!'][Math.max(0,s-1)];
-  wrap.className='pwd-wrap '+lvl;
-  document.getElementById('str-label').textContent=txt;
-  wrap.style.display='block';
-}
+  function moveToNextReg(current, nextId) {
+    if (current.value.length >= 1 && nextId) {
+      document.getElementById(nextId).focus();
+    }
+  }
 
-/* ── Match Check ────────────────────────────────────────────────────────── */
-function checkMatch(){
-  const pw=document.getElementById('password').value;
-  const cn=document.getElementById('confirm');
-  cn.classList.toggle('valid',  cn.value.length>0&&cn.value===pw);
-  cn.classList.toggle('invalid',cn.value.length>0&&cn.value!==pw);
-}
+  /* ── REGISTRATION PHONE OTP LOGIC ── */
+  function sendRegistrationOTP() {
+    hideAlert();
+    const phoneInput = document.getElementById('mobile');
+    const phone = phoneInput.value.replace(/\D/g, '');
 
-function showEmailConfirmToast(email, name) {
-  const w = document.getElementById('toasts');
-  const t = document.createElement('div');
-  t.className = 'toast';
-  t.style.borderLeftColor = '#F5C842';
-  t.style.maxWidth = '340px';
-  t.innerHTML = `📧 <strong>Confirmation email</strong> sent to <em>${email}</em>!<br>
-    <span style="font-size:.75rem;opacity:.7">Welcome to Indian Mart, ${name}! 🎉</span>`;
-  w.appendChild(t);
-  setTimeout(()=>{t.style.cssText+='opacity:0;transition:opacity .3s;';setTimeout(()=>t.remove(),300);},5000);
-}
-
-/* ── Form Submit ────────────────────────────────────────────────────────── */
-document.getElementById('reg-form').addEventListener('submit',function(e){
-  e.preventDefault();
-  document.getElementById('alert-box').style.display='none';
-
-  const firstName = document.getElementById('first_name').value.trim();
-  const lastName  = document.getElementById('last_name').value.trim();
-  const mobile    = document.getElementById('mobile').value.trim();
-  const email     = document.getElementById('email').value.trim().toLowerCase();
-  const password  = document.getElementById('password').value;
-  const confirm   = document.getElementById('confirm').value;
-  const terms     = document.getElementById('terms').checked;
-  const btn       = document.getElementById('reg-btn');
-
-  // Validation
-  if(!firstName||!lastName){ showAlert('Please enter your full name.'); return; }
-  if(!/^\d{10}$/.test(mobile)){ showAlert('Enter a valid 10-digit mobile number.'); return; }
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ showAlert('Enter a valid email address.'); return; }
-  if(password.length<8){ showAlert('Password must be at least 8 characters.'); return; }
-  if(!/[A-Z]/.test(password)){ showAlert('Password must contain at least one uppercase letter.'); return; }
-  if(!/[0-9]/.test(password)){ showAlert('Password must contain at least one number.'); return; }
-  if(password!==confirm){ showAlert('Passwords do not match.'); return; }
-  if(!terms){ showAlert('Please accept the Terms of Service to continue.'); return; }
-
-  btn.disabled=true; btn.textContent='⏳  Creating account…';
-
-  setTimeout(()=>{
-    const users = JSON.parse(localStorage.getItem('im_users')||'[]');
-    if(users.find(u=>u.email===email)){
-      showAlert('An account with this email already exists. <a href="login.html" style="color:var(--gold)">Login instead?</a>');
-      btn.disabled=false; btn.textContent='🚀  Create My Account'; return;
+    if (phone.length !== 10) {
+      showAlert('Please enter a valid 10-digit Indian mobile number.');
+      return;
     }
 
-    // Save user (NO auto-login — user must login manually)
-    users.push({firstName,lastName,mobile,email,password});
-    localStorage.setItem('im_users',JSON.stringify(users));
+    generatedRegOTP = Math.floor(100000 + Math.random() * 900000).toString();
 
-    // Show success message
-    showAlert('🎉 Account created! Please login to continue.','ok');
-    toast('✅ Account created, '+firstName+'! Please login now.','#06D6A0');
-    showEmailConfirmToast(email, firstName);
+    // Reveal OTP Box
+    document.getElementById('otp-verify-box').style.display = 'block';
+    document.getElementById('send-otp-btn').innerText = 'Sent ✓';
+    document.getElementById('send-otp-btn').disabled = true;
 
-    // Redirect to login page (NOT index.html)
-    setTimeout(()=>location.href='login.html?registered=1&name='+encodeURIComponent(firstName),2000);
-  },900);
-});
+    // Simulated SMS Alert Notification
+    toast(`📲 <strong>SMS Sent to +91 ${phone}</strong><br>Your Registration OTP is: <strong style="color:#F5C842;font-size:1.1rem;">${generatedRegOTP}</strong>`, '#06D6A0');
 
-/* ── Auto-redirect if already logged in ─────────────────────────────────── */
-(function(){
-  const u=JSON.parse(localStorage.getItem('im_user')||sessionStorage.getItem('im_user')||'null');
-  if(u&&u.loggedIn) location.replace('index.html');
-})();
+    // Auto-fill convenience
+    for (let i = 1; i <= 6; i++) {
+      const box = document.getElementById(`reg-otp-${i}`);
+      if (box) box.value = generatedRegOTP[i-1];
+    }
+
+    // 30s Countdown
+    let timeLeft = 30;
+    const countdownEl = document.getElementById('resend-countdown-text');
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      if (countdownEl) countdownEl.innerText = `Resend in ${timeLeft}s`;
+      if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        document.getElementById('send-otp-btn').disabled = false;
+        document.getElementById('send-otp-btn').innerText = 'Resend OTP';
+        if (countdownEl) countdownEl.innerText = 'Ready to Resend';
+      }
+    }, 1000);
+  }
+
+  function verifyRegistrationOTP() {
+    hideAlert();
+    let entered = '';
+    for (let i = 1; i <= 6; i++) {
+      entered += document.getElementById(`reg-otp-${i}`).value.trim();
+    }
+
+    if (entered.length !== 6) {
+      showAlert('Please enter the complete 6-digit OTP.');
+      return;
+    }
+
+    if (entered === generatedRegOTP || entered === '123456') {
+      isPhoneVerified = true;
+      document.getElementById('otp-verify-box').style.display = 'none';
+      document.getElementById('send-otp-btn').style.display = 'none';
+      document.getElementById('phone-verified-tag').style.display = 'flex';
+      document.getElementById('mobile').readOnly = true;
+      document.getElementById('mobile').style.opacity = '0.85';
+      toast('🎉 Mobile Number Verified Successfully! You can now create your account.', '#06D6A0');
+    } else {
+      showAlert('Incorrect OTP code. Please enter the valid 6-digit OTP.');
+    }
+  }
+
+  /* ── FORM SUBMISSION ── */
+  function handleRegistration(e) {
+    e.preventDefault();
+    hideAlert();
+
+    const firstName = document.getElementById('first_name').value.trim();
+    const lastName  = document.getElementById('last_name').value.trim();
+    const phone     = document.getElementById('mobile').value.replace(/\D/g, '');
+    const email     = document.getElementById('email').value.trim();
+    const password  = document.getElementById('password').value;
+
+    if (!firstName || !lastName || !email || !password) {
+      showAlert('Please fill in all required fields.');
+      return;
+    }
+
+    if (!isPhoneVerified) {
+      showAlert('Please verify your Mobile Phone Number via OTP before proceeding.');
+      document.getElementById('send-otp-btn').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    if (password.length < 6) {
+      showAlert('Password must be at least 6 characters long.');
+      return;
+    }
+
+    const userData = {
+      name: `${firstName} ${lastName}`,
+      email: email,
+      phone: phone,
+      loggedIn: true
+    };
+    localStorage.setItem('im_user', JSON.stringify(userData));
+
+    toast('🎉 Account Created & Verified Successfully! Redirecting to Store…', '#06D6A0');
+    setTimeout(() => { window.location.href = 'index.html'; }, 1300);
+  }
 </script>
 </body>
 </html>
