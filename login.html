@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — Indian Mart</title>
+  <meta name="description" content="Sign in to Indian Mart — India's premier online shopping destination.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ════════════════════════════════════════════════
+       RESET & ROOT
+    ════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold:    #F5C842;
+      --gold-2:  #E8A020;
+      --orange:  #FF6B2B;
+      --cream:   #FDF8EF;
+      --dark:    #0B0C10;
+      --dark-2:  #13141A;
+      --glass:   rgba(255,255,255,0.055);
+      --glass-b: rgba(255,255,255,0.1);
+      --text:    #F0EBE0;
+      --text-2:  rgba(240,235,224,0.55);
+      --red:     #FF4D6D;
+      --green:   #06D6A0;
+      --radius:  18px;
+      --ease:    cubic-bezier(0.16,1,0.3,1);
+    }
+    html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      min-height: 100dvh;
+      overflow-x: hidden;
+    }
+
+    /* ════════════════════════════════════════════════
+       ANIMATED BACKGROUND
+    ════════════════════════════════════════════════ */
+    .bg {
+      position: fixed; inset: 0; z-index: 0; overflow: hidden;
+      background: radial-gradient(ellipse 100% 80% at 15% 0%,   #1a0a2e 0%, transparent 55%),
+                  radial-gradient(ellipse 80%  70% at 90% 100%, #1c0a00 0%, transparent 55%),
+                  radial-gradient(ellipse 60%  50% at 50% 50%,  #0d0b1a 0%, transparent 100%),
+                  #0B0C10;
+    }
+    .blob {
+      position: absolute; border-radius: 50%;
+      filter: blur(100px); pointer-events: none;
+      animation: blobDrift ease-in-out infinite alternate;
+    }
+    .blob-1 { width:620px;height:620px;top:-200px;left:-180px;background:radial-gradient(circle,rgba(245,200,66,.14),transparent 68%);animation-duration:12s; }
+    .blob-2 { width:480px;height:480px;bottom:-150px;right:-120px;background:radial-gradient(circle,rgba(255,107,43,.1),transparent 68%);animation-duration:15s;animation-delay:-5s; }
+    .blob-3 { width:340px;height:340px;top:40%;left:55%;background:radial-gradient(circle,rgba(100,60,255,.08),transparent 68%);animation-duration:18s;animation-delay:-9s; }
+    @keyframes blobDrift {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(30px,20px) scale(1.06); }
+    }
+
+    /* Floating sparkles */
+    .sparkle {
+      position: absolute; width:3px;height:3px;border-radius:50%;
+      background: var(--gold); pointer-events:none;
+      animation: sparkleFly linear infinite;
+    }
+    @keyframes sparkleFly {
+      0%   { transform:translateY(110vh) rotate(0deg); opacity:0; }
+      8%   { opacity:1; }
+      92%  { opacity:.6; }
+      100% { transform:translateY(-5vh) rotate(360deg) translateX(var(--dx,0px)); opacity:0; }
+    }
+
+    /* ════════════════════════════════════════════════
+       HEADER
+    ════════════════════════════════════════════════ */
+    .page-header {
+      position: relative; z-index: 20;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 44px;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none; color: var(--text);
+    }
+    .logo-mark {
+      width: 46px; height: 46px;
+      background: linear-gradient(135deg, var(--gold), var(--orange));
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 6px 28px rgba(245,200,66,.35);
+    }
+    .logo-text {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800; font-size: 1.35rem; letter-spacing: -.02em;
+    }
+    .logo-text em { color: var(--gold); font-style: normal; }
+    .header-back {
+      display: flex; align-items: center; gap: 6px;
+      text-decoration: none; color: var(--text-2);
+      font-size: .82rem; font-weight: 500;
+      padding: 8px 18px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.04);
+      backdrop-filter: blur(12px);
+      transition: all .25s var(--ease);
+    }
+    .header-back:hover { color: var(--text); border-color: rgba(245,200,66,.35); background: rgba(245,200,66,.07); }
+
+    /* ════════════════════════════════════════════════
+       MAIN LAYOUT
+    ════════════════════════════════════════════════ */
+    .auth-wrap {
+      position: relative; z-index: 10;
+      display: flex; align-items: center; justify-content: center;
+      min-height: calc(100dvh - 100px);
+      padding: 20px;
+    }
+
+    /* ════════════════════════════════════════════════
+       CARD
+    ════════════════════════════════════════════════ */
+    .card {
+      width: 100%; max-width: 448px;
+      background: var(--glass);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 28px;
+      padding: 44px 46px;
+      backdrop-filter: blur(48px);
+      -webkit-backdrop-filter: blur(48px);
+      box-shadow: 0 40px 100px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.03) inset;
+      position: relative; overflow: hidden;
+      animation: cardIn .65s var(--ease) both;
+    }
+    @keyframes cardIn {
+      from { opacity:0; transform:translateY(36px) scale(.96); }
+      to   { opacity:1; transform:translateY(0) scale(1); }
+    }
+    /* top shimmer line */
+    .card::before {
+      content:'';
+      position:absolute; top:0; left:10%; right:10%; height:1.5px;
+      background: linear-gradient(90deg,transparent,var(--gold),var(--orange),transparent);
+      border-radius:0 0 4px 4px;
+    }
+
+    /* ── Badge ── */
+    .badge {
+      display:inline-flex; align-items:center; gap:5px;
+      background:rgba(245,200,66,.1); border:1px solid rgba(245,200,66,.28);
+      color:var(--gold); font-size:.68rem; font-weight:700;
+      letter-spacing:.08em; text-transform:uppercase;
+      padding:4px 14px; border-radius:999px; margin-bottom:16px;
+    }
+    /* ── Title ── */
+    .card-title {
+      font-family:'Outfit',sans-serif; font-size:2.05rem; font-weight:800;
+      line-height:1.15; margin-bottom:8px; color:#fff; letter-spacing:-.03em;
+    }
+    .card-title span {
+      background:linear-gradient(130deg,var(--gold),var(--orange));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    }
+    .card-sub { font-size:.85rem; color:var(--text-2); margin-bottom:28px; line-height:1.65; }
+
+    /* ── Alerts ── */
+    .alert {
+      display:flex; align-items:flex-start; gap:10px;
+      padding:11px 16px; border-radius:12px;
+      font-size:.8rem; line-height:1.55;
+      margin-bottom:16px;
+      animation:alertIn .3s var(--ease);
+    }
+    @keyframes alertIn { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:translateY(0)} }
+    .alert-err { background:rgba(255,77,109,.1); border:1px solid rgba(255,77,109,.3); color:#ff8fa5; }
+    .alert-ok  { background:rgba(6,214,160,.09);  border:1px solid rgba(6,214,160,.25); color:#34d39c; }
+
+    /* ── Form ── */
+    .form { display:flex; flex-direction:column; gap:15px; }
+    .fgroup { display:flex; flex-direction:column; gap:5px; }
+    .flabel { font-size:.75rem; font-weight:600; color:rgba(240,235,224,.55); letter-spacing:.04em; }
+    .fwrap { position:relative; display:flex; align-items:center; }
+    .ficon { position:absolute; left:15px; font-size:16px; opacity:.4; pointer-events:none; transition:opacity .2s; }
+    .fwrap:focus-within .ficon { opacity:.9; }
+    .finput {
+      width:100%; padding:13px 46px;
+      background:rgba(255,255,255,.06); border:1.5px solid rgba(255,255,255,.1);
+      border-radius:13px; color:var(--text); font-size:.88rem; font-family:'Inter',sans-serif;
+      outline:none; transition:all .25s var(--ease);
+    }
+    .finput::placeholder { color:rgba(240,235,224,.2); }
+    .finput:hover { border-color:rgba(255,255,255,.18); background:rgba(255,255,255,.09); }
+    .finput:focus { border-color:rgba(245,200,66,.6); background:rgba(245,200,66,.06); box-shadow:0 0 0 3px rgba(245,200,66,.1); }
+    .eye { position:absolute; right:12px; background:none; border:none; cursor:pointer; font-size:15px; opacity:.35; padding:5px; transition:opacity .2s; }
+    .eye:hover { opacity:.75; }
+
+    /* Options row */
+    .opts-row { display:flex; align-items:center; justify-content:space-between; }
+    .cklabel {
+      display:flex; align-items:center; gap:8px;
+      font-size:.78rem; color:var(--text-2); cursor:pointer;
+    }
+    .cklabel input[type=checkbox] {
+      appearance:none; width:16px; height:16px; border-radius:5px;
+      border:1.5px solid rgba(255,255,255,.2); background:rgba(255,255,255,.05);
+      cursor:pointer; transition:all .2s; position:relative; flex-shrink:0;
+    }
+    .cklabel input[type=checkbox]:checked { background:var(--gold); border-color:var(--gold); }
+    .cklabel input[type=checkbox]:checked::after {
+      content:'✓'; position:absolute; top:50%; left:50%;
+      transform:translate(-50%,-50%); color:#000; font-size:10px; font-weight:800;
+    }
+    .forgot { font-size:.78rem; color:var(--gold); text-decoration:none; font-weight:600; transition:color .2s; }
+    .forgot:hover { color:var(--orange); }
+
+    /* Submit */
+    .submit {
+      width:100%; padding:14.5px; border-radius:14px; border:none;
+      background:linear-gradient(130deg,var(--gold) 0%,var(--orange) 100%);
+      color:#0B0C10; font-family:'Outfit',sans-serif; font-size:.95rem; font-weight:800;
+      cursor:pointer; transition:all .3s var(--ease);
+      box-shadow:0 6px 28px rgba(245,200,66,.3); margin-top:4px; position:relative; overflow:hidden;
+      letter-spacing:.01em;
+    }
+    .submit::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(180deg,rgba(255,255,255,.18),transparent);
+      opacity:0; transition:opacity .25s;
+    }
+    .submit:hover:not(:disabled) { transform:translateY(-3px); box-shadow:0 10px 40px rgba(245,200,66,.45); }
+    .submit:hover::after { opacity:1; }
+    .submit:active:not(:disabled) { transform:translateY(-1px); }
+    .submit:disabled { opacity:.55; cursor:not-allowed; transform:none; }
+
+    /* Alt link + trust */
+    .alt { text-align:center; font-size:.8rem; color:var(--text-2); margin-top:22px; }
+    .alt a { color:var(--gold); text-decoration:none; font-weight:700; transition:color .2s; }
+    .alt a:hover { color:var(--orange); }
+    .trust-row { display:flex; align-items:center; justify-content:center; gap:22px; margin-top:20px; padding-top:18px; border-top:1px solid rgba(255,255,255,.06); }
+    .trust-it { display:flex; align-items:center; gap:5px; font-size:.7rem; color:rgba(240,235,224,.3); }
+
+    /* ── Footer ── */
+    .page-footer { position:relative;z-index:10; text-align:center; padding:22px; font-size:.73rem; color:rgba(240,235,224,.22); }
+    .page-footer a { color:rgba(240,235,224,.3); margin:0 9px; text-decoration:none; }
+    .page-footer a:hover { color:var(--gold); }
+
+    /* Toast */
+    #toasts { position:fixed; bottom:26px; right:26px; z-index:9999; display:flex; flex-direction:column; gap:10px; }
+    .toast {
+      padding:12px 20px; background:rgba(11,12,16,.97);
+      border-left:3px solid var(--gold); border-radius:12px;
+      color:var(--text); font-size:.83rem; font-weight:500; max-width:310px;
+      box-shadow:0 8px 32px rgba(0,0,0,.55);
+      animation:toastIn .35s var(--ease);
+    }
+    @keyframes toastIn { from{opacity:0;transform:translateX(28px)} to{opacity:1;transform:translateX(0)} }
+
+    /* Responsive */
+    @media (max-width:520px) {
+      .page-header { padding:18px 22px; }
+      .card { padding:30px 24px; border-radius:22px; }
+      .card-title { font-size:1.65rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- BACKGROUND -->
+<div class="bg">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div id="sparkle-wrap"></div>
+</div>
+
+<!-- HEADER -->
+<header class="page-header">
+  <a href="index.html" class="logo">
+    <div class="logo-mark">🇮🇳</div>
+    <span class="logo-text">Indian<em>Mart</em></span>
+  </a>
+  <a href="index.html" class="header-back">← Back to Shopping</a>
+</header>
+
+<!-- MAIN -->
+<main class="auth-wrap">
+  <div class="card">
+
+    <div class="badge">🔐 &nbsp;Secure Login</div>
+    <h1 class="card-title">Welcome <span>Back!</span></h1>
+    <p class="card-sub">Sign in to access your orders, wishlist &amp; exclusive member deals.</p>
+
+    <div id="alert-box" style="display:none"></div>
+
+    <!-- Email Form -->
+    <form class="form" id="login-form" novalidate autocomplete="on">
+
+      <div class="fgroup">
+        <label class="flabel" for="email">Email Address</label>
+        <div class="fwrap">
+          <span class="ficon">✉️</span>
+          <input type="email" id="email" name="email" class="finput"
+                 placeholder="you@example.com" autocomplete="email" required>
+        </div>
+      </div>
+
+      <div class="fgroup">
+        <label class="flabel" for="password">Password</label>
+        <div class="fwrap">
+          <span class="ficon">🔒</span>
+          <input type="password" id="password" name="password" class="finput"
+                 placeholder="Enter your password" autocomplete="current-password" required>
+          <button type="button" class="eye" id="eye-pw" onclick="toggleEye('password','eye-pw')">👁</button>
+        </div>
+      </div>
+
+      <div class="opts-row">
+        <label class="cklabel">
+          <input type="checkbox" id="remember"> Remember me
+        </label>
+        <a href="#" class="forgot">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="submit" id="login-btn">🛒 &nbsp;Sign In to Indian Mart</button>
+    </form>
+
+    <p class="alt">Don't have an account? <a href="register.html">Create Account →</a></p>
+
+    <div class="trust-row">
+      <span class="trust-it">🔒 SSL Secured</span>
+      <span class="trust-it">🇮🇳 Made in India</span>
+      <span class="trust-it">✅ Verified</span>
+    </div>
+
+  </div>
+</main>
+
+<footer class="page-footer">
+  <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Help</a>
+  <div style="margin-top:6px">© 2025 Indian Mart. All rights reserved.</div>
+</footer>
+
+<div id="toasts"></div>
+
+<script>
+/* ── Sparkles ─────────────────────────────────────────────────────────── */
+(function(){
+  const w = document.getElementById('sparkle-wrap');
+  for(let i=0;i<35;i++){
+    const s=document.createElement('div'); s.className='sparkle';
+    s.style.cssText=`left:${Math.random()*100}%;width:${1+Math.random()*2}px;height:${1+Math.random()*2}px;animation-duration:${7+Math.random()*12}s;animation-delay:${-Math.random()*19}s;--dx:${(Math.random()-.5)*100}px;opacity:${.3+Math.random()*.5};background:${Math.random()>.5?'#F5C842':'#FF6B2B'}`;
+    w.appendChild(s);
+  }
+})();
+
+/* ── Helpers ──────────────────────────────────────────────────────────── */
+function toggleEye(id,bid){
+  const i=document.getElementById(id),b=document.getElementById(bid);
+  i.type=i.type==='password'?'text':'password';
+  b.textContent=i.type==='password'?'👁':'🙈';
+}
+function showAlert(msg,type='err'){
+  const b=document.getElementById('alert-box');
+  b.innerHTML=`<div class="alert alert-${type}">${type==='err'?'❌':'✅'} ${msg}</div>`;
+  b.style.display='block';
+}
+function hideAlert(){ document.getElementById('alert-box').style.display='none'; }
+function toast(msg,color='#F5C842'){
+  const w=document.getElementById('toasts'),t=document.createElement('div');
+  t.className='toast'; t.style.borderLeftColor=color; t.textContent=msg;
+  w.appendChild(t);
+  setTimeout(()=>{t.style.cssText+='opacity:0;transition:opacity .3s;';setTimeout(()=>t.remove(),300);},3600);
+}
+
+/* ── Main Login Form ──────────────────────────────────────────────────── */
+document.getElementById('login-form').addEventListener('submit',function(e){
+  e.preventDefault(); hideAlert();
+  const email    = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  const remember = document.getElementById('remember').checked;
+  const btn      = document.getElementById('login-btn');
+
+  if(!email||!password){ showAlert('Please fill in all fields.'); return; }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ showAlert('Please enter a valid email address.'); return; }
+  if(password.length<6){ showAlert('Password must be at least 6 characters.'); return; }
+
+  btn.disabled=true; btn.textContent='⏳  Signing in…';
+
+  // ── Simulate login (replace with real API call if using a server) ──
+  setTimeout(()=>{
+    // Check saved users
+    const users = JSON.parse(localStorage.getItem('im_users')||'[]');
+    // Demo account always works
+    const isDemoEmail = email.toLowerCase()==='demo@indianmart.in';
+    const isDemoPwd   = password==='Demo@1234';
+    const found = users.find(u=>u.email===email.toLowerCase()&&u.password===password);
+
+    if((isDemoEmail&&isDemoPwd)||found){
+      const name = found?found.firstName : 'Demo User';
+      const userData = {name,email:email.toLowerCase(),loggedIn:true};
+      if(remember) localStorage.setItem('im_user',JSON.stringify(userData));
+      else sessionStorage.setItem('im_user',JSON.stringify(userData));
+      toast('✅ Welcome back, '+name+'! Redirecting…','#06D6A0');
+      setTimeout(()=>location.href='index.html',1400);
+    } else {
+      showAlert('Invalid email or password. <a href="register.html" style="color:var(--gold)">Create an account?</a>');
+      btn.disabled=false; btn.textContent='🛒  Sign In to Indian Mart';
+    }
+  },900);
+});
+
+/* ── Auto-login if session active ─────────────────────────────────────── */
+(function(){
+  const u = JSON.parse(localStorage.getItem('im_user')||sessionStorage.getItem('im_user')||'null');
+  if(u&&u.loggedIn) location.replace('index.html');
+})();
+
+/* ── Show welcome message if coming from register ──────────────────────── */
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  if(params.get('registered') === '1') {
+    const name = decodeURIComponent(params.get('name') || 'there');
+    const alertBox = document.getElementById('alert-box');
+    alertBox.innerHTML = `
+      <div class="alert alert-ok" style="flex-direction:column;align-items:flex-start;gap:4px;">
+        <strong style="font-size:.9rem;">🎉 Account created successfully, ${name}!</strong>
+        <span style="font-size:.8rem;opacity:.8">Please sign in below to access your account.</span>
+      </div>`;
+    alertBox.style.display = 'block';
+    // Pre-fill nothing but show a toast too
+    setTimeout(()=>{
+      toast('✅ Account ready! Login with your email & password.','#06D6A0');
+    }, 400);
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://phenomenal-tartufo-af071e.netlify.app/</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Electronics -->
+  <url>
+    <loc>https://phenomenal-tartufo-af071e.netlify.app/#electronics</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 5G Mobiles -->
+  <url>
+    <loc>https://phenomenal-tartufo-af071e.netlify.app/#phones</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Audio & ANC -->
+  <url>
+    <loc>https://phenomenal-tartufo-af071e.netlify.app/#audio</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Luxury Watches -->
+  <url>
+    <loc>https://phenomenal-tartufo-af071e.netlify.app/#watches</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Men Fashion -->
+  <url>
+    <loc>https://phenomenal-tartufo-af071e.netlify.app/#men</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Women Ethnic Wear -->
+  <url>
+    <loc>https://phenomenal-tartufo-af071e.netlify.app/#women</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Customer Reviews -->
+  <url>
+    <loc>https://phenomenal-tartufo-af071e.netlify.app/#customer-reviews</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>
